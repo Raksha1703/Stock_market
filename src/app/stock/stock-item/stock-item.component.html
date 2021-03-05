@@ -1,13 +1,29 @@
 <div class="container stock-container">
-    <div class="row name">
-        <div class="col-sm">
-            <h3>{{stock.name + ' (' + stock.code + ')'}}</h3>
-        </div>
+  <div class="row name">
+    <div class="col-sm">
+      <h3>{{ stock.name + " (" + stock.code + ")" }}</h3>
     </div>
-    <div class="row">
-        <div class="col-sm" [class]="stock.isPositiveChange() ? 'positive' : 'negetive'">
-            $ {{stock.price}}
-            <ng-content></ng-content>
-        </div>
+    <div class="row">{{stock.exchange}}</div>
+  </div>
+  <div class="row">
+    <div
+      class="price"
+      [class.positive]="stock.isPositiveChange()"
+      [class.negative]="!stock.isPositiveChange()"
+    >
+      $ {{ stock.price }}
+      <ng-content></ng-content>
     </div>
+    <div>
+        <button (click)="onToggleFavorite($event)" *ngIf="!stock.favorite">
+            Add to Favorite
+        </button>
+    </div>
+    <div>
+        <button (click)="onToggleFavorite($event)" *ngIf="stock.favorite">
+            Remove from Favorite
+        </button>
+    </div>
+  </div>
 </div>
+

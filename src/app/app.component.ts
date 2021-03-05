@@ -1,5 +1,6 @@
 import { Component,OnInit } from '@angular/core';
 import { Stock } from 'src/app/model/stock';
+import { StockService } from './services/stock.service';
 
 @Component({
   selector: 'app-root',
@@ -9,23 +10,23 @@ import { Stock } from 'src/app/model/stock';
 export class AppComponent {
   title = 'Stock Market App';
 
-  public stock: Stock;
+  public stocks: Stock;
   private counter: number=1;
   ngOnInit(): void {
-    this.stock = new Stock('Test Stock Company'+ this.counter++, 'TSC', 85, 80);
+    this.stocks = new Stock('Test Stock Company'+ this.counter++, 'TSC', 85, 80,'ABC');
   }
-
+  constructor(private StockService:StockService) { }
   onToggleFavorite(stock: Stock) {
     console.log('Favorite for stock ', stock, ' was triggered'); 
-    this.stock.favorite = !this.stock.favorite;
+    this.stocks.favorite = !this.stocks.favorite;
     }
 
   changeStockObject() {
-    this.stock = new Stock('Test Stock Company'+ this.counter++, 'TSC', 85, 80);
+    this.stocks = new Stock('Test Stock Company'+ this.counter++, 'TSC', 85, 80,'ABC');
     }
 
   changeStockPrice(){
-    this.stock.price += 10;
+    this.stocks.price += 10;
   }
   testMethod() {
     console.log('Test method in AppComponent triggered');
