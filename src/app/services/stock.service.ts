@@ -19,6 +19,7 @@ export class StockService {
 
   createStock(stock:Stock){
     let foundStock = this.stocks.find(each => each.code === stock.code);
+    console.log(foundStock);
     if(foundStock){
       return false;
     }
