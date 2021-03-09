@@ -11,46 +11,66 @@ let counter = 1;
   styleUrls: ['./create-stock.component.scss'],
 })
 export class CreateStockComponent implements OnInit {
-  public stock: Stock;
+
+  //public nameControl = new FormControl();
+  //public stockGroup: FormGroup;
   public confirmed = false;
   //public message = null;
   public exchanges = ['NYSE', 'NASDAQ', 'OTHER'];
-  // public stockForm: FormGroup = new FormGroup({
-  //   name: new FormControl(null, Validators.required),
-  //   code: new FormControl(null, [Validators.required, Validators.minLength(2)]),
-  //   price: new FormControl(0, [Validators.required, Validators.min(0)]),
-  //   notablePeople: this.fb.array([])
-  //   });
+  public stockForm: FormGroup;
+  private stock: Stock;  
 
-  console(v){
-    console.log(v);
+  constructor(private fb:FormBuilder) {
+    this.createForm();
+    this.stock = new Stock('Test' +counter++,'TST',20,10);
   }
-  constructor() {
-    this.stock = new Stock('', '', 0, 0, 'NASDAQ');
-  }
-
   ngOnInit(): void {}
 
-  setStockPrice(price) {
-    this.stock.price = price;
-    this.stock.previousPrice = price;
+  createForm(){
+    this.stockForm = this.fb.group({
+      name:[null,Validators.required],
+      code:[null,[Validators.minLength(2),Validators.required]],
+      price:[0,[Validators.required,Validators.min(0)]]
+    });
   }
 
-  createStock(stockForm) {
-    console.log('Stock form', stockForm); 
-    if (stockForm.valid) {
-      console.log('Creating stock ', this.stock); 
+  onSubmit() {
+    this.stock = Object.assign({},this.stockForm.value);
+    console.log('Saving stock',this.stock);
     }
-    else{
-      console.error('Stock form is in an invalid state');
-    }
+
+  loadStockFromServer(){
+    this.stock = new Stock('Test' +counter++,'TST',20,10);
+    let stockFormModel = Object.assign({},this.stockForm.value);
+    delete stockFormModel.previousPrice;
+    delete stockFormModel.favorite;
+    this.stockForm.setValue(stockFormModel);
   }
 
-  // onSubmit() {
-  //   this.stock = Object.assign({}, this.stockForm.value);
-  //   console.log('Saving stock', this.stock);
-  //   this.createStock(this.stockForm);
+  patchStockForm(){
+    this.stock = new Stock('Test' +counter++,'TST',20,10);
+    this.stockForm.patchValue(this.stock);
+  }
+
+  resetForm(){
+    this.stockForm.reset();
+  }
+  // setStockPrice(price) {
+  //   this.stock.price = price;
+  //   this.stock.previousPrice = price;
+  // }
+
+  // createStock(stockForm) {
+  //   console.log('Stock form', stockForm); 
+  //   if (stockForm.valid) {
+  //     console.log('Creating stock ', this.stock); 
   //   }
+  //   else{
+  //     console.error('Stock form is in an invalid state');
+  //   }
+  // }
+
+  
 
   // get notablePeople(): FormArray{
   //   return this.stockForm.get('notablePeople') as FormArray;

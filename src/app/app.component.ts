@@ -13,7 +13,7 @@ export class AppComponent {
   public stocks: Stock;
   private counter: number=1;
   ngOnInit(): void {
-    this.stocks = new Stock('Test Stock Company'+ this.counter++, 'TSC', 85, 80,'ABC');
+    this.stocks = new Stock('Test Stock Company'+ this.counter++, 'TSC', 85, 80);
   }
   constructor(private StockService:StockService) { }
   onToggleFavorite(stock: Stock) {
@@ -22,7 +22,7 @@ export class AppComponent {
     }
 
   changeStockObject() {
-    this.stocks = new Stock('Test Stock Company'+ this.counter++, 'TSC', 85, 80,'ABC');
+    this.stocks = new Stock('Test Stock Company'+ this.counter++, 'TSC', 85, 80);
     }
 
   changeStockPrice(){

@@ -7,9 +7,9 @@ export class StockService {
   private stocks: Stock[];
   constructor() { 
     this.stocks = [
-      new Stock('Test Stock Company', 'TSC', 85, 80, 'NASDAQ'), 
-      new Stock('Second Stock Company', 'SSC', 10, 20,'NSE'),
-      new Stock('Last Stock Company', 'LSC', 876, 765,'NYSE')
+      new Stock('Test Stock Company', 'TSC', 85, 80), 
+      new Stock('Second Stock Company', 'SSC', 10, 20),
+      new Stock('Last Stock Company', 'LSC', 876, 765)
     ];
   }
 
