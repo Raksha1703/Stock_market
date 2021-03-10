@@ -1,5 +1,6 @@
 import { Component,OnInit } from '@angular/core';
 import { Stock } from 'src/app/model/stock';
+import { MessageService } from './services/message.service';
 import { StockService } from './services/stock.service';
 
 @Component({
@@ -10,25 +11,27 @@ import { StockService } from './services/stock.service';
 export class AppComponent {
   title = 'Stock Market App';
 
-  public stocks: Stock;
-  private counter: number=1;
+  //public stocks: Stock;
+  //private counter: number=1;
   ngOnInit(): void {
-    this.stocks = new Stock('Test Stock Company'+ this.counter++, 'TSC', 85, 80);
+    this.messageService.message = 'Hello Message Service!';
+    //this.stocks = new Stock('Test Stock Company'+ this.counter++, 'TSC', 85, 80,'ABC');
   }
-  constructor(private StockService:StockService) { }
-  onToggleFavorite(stock: Stock) {
-    console.log('Favorite for stock ', stock, ' was triggered'); 
-    this.stocks.favorite = !this.stocks.favorite;
-    }
+  constructor(public messageService : MessageService) { }
 
-  changeStockObject() {
-    this.stocks = new Stock('Test Stock Company'+ this.counter++, 'TSC', 85, 80);
-    }
+//   onToggleFavorite(stock: Stock) {
+//     console.log('Favorite for stock ', stock, ' was triggered'); 
+//     this.stocks.favorite = !this.stocks.favorite;
+//     }
 
-  changeStockPrice(){
-    this.stocks.price += 10;
-  }
-  testMethod() {
-    console.log('Test method in AppComponent triggered');
-}
+//   changeStockObject() {
+//     this.stocks = new Stock('Test Stock Company'+ this.counter++, 'TSC', 85, 80,'ABC');
+//     }
+
+//   changeStockPrice(){
+//     this.stocks.price += 10;
+//   }
+//   testMethod() {
+//     console.log('Test method in AppComponent triggered');
+// }
 }

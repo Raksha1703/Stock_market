@@ -1,77 +1,96 @@
 import { Component, OnInit } from '@angular/core';
 import {FormArray, FormBuilder, FormControl, FormGroup, Validators,} from '@angular/forms';
 import { Stock } from 'src/app/model/stock';
+import { MessageService } from 'src/app/services/message.service';
 import { StockService } from 'src/app/services/stock.service';
 
-let counter = 1;
+//let counter = 1;
 
 @Component({
   selector: 'app-create-stock',
   templateUrl: './create-stock.component.html',
   styleUrls: ['./create-stock.component.scss'],
+  providers:[MessageService]
 })
 export class CreateStockComponent implements OnInit {
 
   //public nameControl = new FormControl();
   //public stockGroup: FormGroup;
   public confirmed = false;
-  //public message = null;
+  public message = null;
   public exchanges = ['NYSE', 'NASDAQ', 'OTHER'];
-  public stockForm: FormGroup;
-  private stock: Stock;  
+  public stock: Stock;  
 
-  constructor(private fb:FormBuilder) {
-    this.createForm();
-    this.stock = new Stock('Test' +counter++,'TST',20,10);
+  constructor(private stockService:StockService,
+              public messageService:MessageService){
+      this.stock = new Stock('','',0,0,'NASDAQ');
+      this.messageService.message = 'Component Level : Hello Message Service';
   }
+
   ngOnInit(): void {}
 
-  createForm(){
-    this.stockForm = this.fb.group({
-      name:[null,Validators.required],
-      code:[null,[Validators.minLength(2),Validators.required]],
-      price:[0,[Validators.required,Validators.min(0)]]
-    });
-  }
-
-  onSubmit() {
-    this.stock = Object.assign({},this.stockForm.value);
-    console.log('Saving stock',this.stock);
+  createStock(stockForm) {     
+    if (stockForm.valid) {
+      this.stockService.createStock(this.stock)
+      .subscribe((result:any) => {
+        this.message = result.msg;
+        this.stock= new Stock('', '', 0, 0, 'NASDAQ');
+      }, (err) => {
+        this.message = err.msg;
+      });      
     }
-
-  loadStockFromServer(){
-    this.stock = new Stock('Test' +counter++,'TST',20,10);
-    let stockFormModel = Object.assign({},this.stockForm.value);
-    delete stockFormModel.previousPrice;
-    delete stockFormModel.favorite;
-    this.stockForm.setValue(stockFormModel);
+    else {
+     console.error('Stock from is in an invalid state');
+    }
   }
-
-  patchStockForm(){
-    this.stock = new Stock('Test' +counter++,'TST',20,10);
-    this.stockForm.patchValue(this.stock);
+  
+  setStockPrice(price) { 
+    this.stock.price = price; 
+    this.stock.previousPrice = price;
   }
+  
 
-  resetForm(){
-    this.stockForm.reset();
-  }
+  // onSubmit() {
+  //   this.stock = Object.assign({},this.stockForm.value);
+  //   console.log('Saving stock',this.stock);
+  //   }
+  // constructor(private fb:FormBuilder) {
+  //   this.createForm();
+  //   this.stock = new Stock('Test' +counter++,'TST',20,10,'ABC');
+  // }
+  
+
+  // createForm(){
+  //   this.stockForm = this.fb.group({
+  //     name:[null,Validators.required],
+  //     code:[null,[Validators.minLength(2),Validators.required]],
+  //     price:[0,[Validators.required,Validators.min(0)]]
+  //     //notablePeople: this.fb.array([])
+  //   });
+  // }
+
+  // loadStockFromServer(){
+  //   this.stock = new Stock('Test' +counter++,'TST',20,10,'ABC');
+  //   let stockFormModel = Object.assign({},this.stockForm.value);
+  //   delete stockFormModel.previousPrice;
+  //   delete stockFormModel.favorite;
+  //   this.stockForm.setValue(stockFormModel);
+  // }
+
+  // patchStockForm(){
+  //   this.stock = new Stock('Test' +counter++,'TST',20,10,'ABC');
+  //   this.stockForm.patchValue(this.stock);
+  // }
+
+  // resetForm(){
+  //   this.stockForm.reset();
+  // }
   // setStockPrice(price) {
   //   this.stock.price = price;
   //   this.stock.previousPrice = price;
   // }
 
-  // createStock(stockForm) {
-  //   console.log('Stock form', stockForm); 
-  //   if (stockForm.valid) {
-  //     console.log('Creating stock ', this.stock); 
-  //   }
-  //   else{
-  //     console.error('Stock form is in an invalid state');
-  //   }
-  // }
-
   
-
   // get notablePeople(): FormArray{
   //   return this.stockForm.get('notablePeople') as FormArray;
   // }
@@ -87,13 +106,5 @@ export class CreateStockComponent implements OnInit {
   // removeNotablePerson(index: number){
   //   this.notablePeople.removeAt(index);
   // }
-
-  // onSubmit() {
-  //   this.stock = Object.assign({}, this.stockForm.value);
-  //   console.log('Saving stock', this.stock);
-  //   }
-
-  // resetForm(){
-  //   this.stockForm.reset();
-  //   }
+ 
 }
