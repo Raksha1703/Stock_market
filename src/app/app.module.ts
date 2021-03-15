@@ -13,18 +13,24 @@ import { MessageService } from './services/message.service';
 import { from } from 'rxjs';
 import { AuthService } from './services/auth.service';
 import { StockAppInterceptor } from './services/stock-app.interceptor';
+import { AppRoutesModule } from './app-routes.module';
+import { LoginComponent } from './user/login/login.component';
+import { RegisterComponent } from './user/register/register.component';
 @NgModule({
   declarations: [
     AppComponent,
     StockItemComponent,
     CreateStockComponent,
-    StockListComponent
+    StockListComponent,
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
     ReactiveFormsModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    AppRoutesModule
   ],
   providers: [
     StockService,

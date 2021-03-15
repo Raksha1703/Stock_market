@@ -1,6 +1,13 @@
-<div class="container" style="text-align:center">
+<div class="container mt-4" style="text-align:center">
+  <span><a href="/login"  class="btn btn-primary me-md-2">Login</a></span>
+  <span><a href="/register" class="btn btn-primary me-md-2">Register</a></span> 
+  <span><a href="/stocks/list" class="btn btn-primary me-md-2">Stock List</a></span> 
+  <span><a href="/stocks/create" class="btn btn-primary me-md-2">Create Stock</a></span>
+</div>
+<router-outlet></router-outlet>
+<!-- <div class="container" style="text-align:center">
   <h1>{{ title }}!</h1>
   <h4>App level: {{messageService.message}}</h4>
   <app-stock-list></app-stock-list>
   <app-create-stock></app-create-stock>
-</div>
+</div> -->
