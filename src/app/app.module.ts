@@ -16,6 +16,8 @@ import { StockAppInterceptor } from './services/stock-app.interceptor';
 import { AppRoutesModule } from './app-routes.module';
 import { LoginComponent } from './user/login/login.component';
 import { RegisterComponent } from './user/register/register.component';
+import { UserStoreService } from './services/user-store.service';
+import { UserService } from './services/user.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -35,6 +37,8 @@ import { RegisterComponent } from './user/register/register.component';
   providers: [
     StockService,
     MessageService,
+    UserStoreService,
+    UserService,
     AuthService,
     {
       provide: HTTP_INTERCEPTORS, 
