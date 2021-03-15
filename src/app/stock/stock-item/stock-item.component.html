@@ -10,8 +10,8 @@
   <div class="row">
     <div
       class="price"
-      [class.positive]="stock.isPositiveChange()"
-      [class.negative]="!stock.isPositiveChange()"
+      [class.positive]="stock.price > stock.previousPrice"
+      [class.negative]="stock.price <= stock.previousPrice"
     >
       $ {{ stock.price }}
       

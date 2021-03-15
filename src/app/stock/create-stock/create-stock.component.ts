@@ -21,10 +21,19 @@ export class CreateStockComponent implements OnInit {
   public exchanges = ['NYSE', 'NASDAQ', 'OTHER'];
   public stock: Stock;  
 
-  constructor(private stockService:StockService,
-              public messageService:MessageService){
-      this.stock = new Stock('','',0,0,'NASDAQ');
-      this.messageService.message = 'Component Level : Hello Message Service';
+  constructor(private stockService:StockService){
+      this.initializeStock();
+  }
+
+  initializeStock() { 
+    this.stock = {
+    name: '',
+    code: '',
+    price: 0, 
+    previousPrice: 0, 
+    exchange: 'NASDAQ', 
+    favorite: false
+    }; 
   }
 
   ngOnInit(): void {}
@@ -34,7 +43,8 @@ export class CreateStockComponent implements OnInit {
       this.stockService.createStock(this.stock)
       .subscribe((result:any) => {
         this.message = result.msg;
-        this.stock= new Stock('', '', 0, 0, 'NASDAQ');
+        this.initializeStock();
+        //this.stock= new Stock('', '', 0, 0, 'NASDAQ');
       }, (err) => {
         this.message = err.msg;
       });      
