@@ -1,8 +1,16 @@
-<div class="container mt-4" style="text-align:center">
-  <span><a href="/login"  class="btn btn-primary me-md-2">Login</a></span>
-  <span><a href="/register" class="btn btn-primary me-md-2">Register</a></span> 
-  <span><a href="/stocks/list" class="btn btn-primary me-md-2">Stock List</a></span> 
-  <span><a href="/stocks/create" class="btn btn-primary me-md-2">Create Stock</a></span>
+<div class="container mt-4 links" style="text-align:center">
+  <span>
+    <a routerLink="/login"  class="btn btn-secondary me-md-2" routerLinkActive="active">Login</a>
+  </span>
+  <span>
+    <a routerLink="/register" class="btn btn-secondary me-md-2" routerLinkActive="active">Register</a>
+  </span> 
+  <span>
+    <a routerLink="/stocks/list" class="btn btn-secondary me-md-2" routerLinkActive="active">Stock List</a>
+  </span> 
+  <span>
+    <a routerLink="/stocks/create" class="btn btn-secondary me-md-2" routerLinkActive="active">Create Stock</a>
+  </span>
 </div>
 <router-outlet></router-outlet>
 <!-- <div class="container" style="text-align:center">
