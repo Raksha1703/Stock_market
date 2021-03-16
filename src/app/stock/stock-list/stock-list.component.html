@@ -1,9 +1,10 @@
-<div>
-  <input name="searchBox"
-  [(ngModel)]="searchString" placeholder="Search Here" (keyup)="search()">
+<div class="offset-5 mt-3">
+  <div>
+    <input name="searchBox"
+    [(ngModel)]="searchString" placeholder="Search Here" (keyup)="search()">
+  </div>  
+  <h2>We have found {{(stocks$ | async)?.length}} Stocks!!</h2>
 </div>
-  
-<h2>We have found {{(stocks$ | async)?.length}} Stocks!!</h2>
 
 <app-stock-item *ngFor="let stock of stocks$ | async" [stock]="stock">
 </app-stock-item>

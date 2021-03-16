@@ -1,1 +1,30 @@
-<p>register works!</p>
+<div class="offset-5 mt-3">
+    <h3>{{message}}</h3>
+</div>
+<div class="container">
+    <div class="form-group offset-5 mt-3">
+        <form (ngSubmit)="register()">
+            <div class="user-name">
+                <label class="form-label">Username:</label>
+                <input type="text"
+                    placeholder="Username"
+                    required
+                    name="username"
+                    #usernameField="ngModel"
+                    [(ngModel)]="username">
+                <div *ngIf="usernameField.errors && usernameField.errors.required">Username is Mandatory</div>
+            </div>
+            <div class="password">
+                <label class="form-label">Password:</label>
+                <input type="password"
+                    placeholder="Password"
+                    required
+                    name="password"
+                    #passwordField="ngModel"
+                    [(ngModel)]="password">
+                <div *ngIf="passwordField.errors && passwordField.errors.required">Password is Mandatory</div>
+            </div>
+            <button type="submit">Register</button>
+        </form>
+    </div>
+</div>
