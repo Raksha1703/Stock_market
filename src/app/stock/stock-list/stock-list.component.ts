@@ -4,6 +4,9 @@ import { Stock } from 'src/app/model/stock';
 import { AuthService } from 'src/app/services/auth.service';
 import { StockService } from 'src/app/services/stock.service';
 import { share } from 'rxjs/operators';
+import { UserStoreService } from 'src/app/services/user-store.service';
+import { ActivatedRoute } from '@angular/router';
+
 
 
 @Component({
@@ -15,16 +18,20 @@ export class StockListComponent implements OnInit {
 
   public stocks$:Observable<Stock[]>;
   public searchString : '';
-  constructor(private stockService:StockService) {  }
+  constructor(private stockService:StockService,
+              private userStore:UserStoreService,
+              private route: ActivatedRoute) {  }
 
   ngOnInit(){
-    this.stocks$ = this.stockService.getStocks(this.searchString).pipe(share());
+    console.log('Page No. :', 
+                this.route.snapshot.queryParamMap.get('page'));
+    this.stocks$ = this.stockService.getStocks();
     //this.fetchStocks();
   }
 
-  search() {
-    this.stocks$ = this.stockService.getStocks(this.searchString).pipe(share());
-  }
+  // search() {
+  //   this.stocks$ = this.stockService.getStocks(this.searchString).pipe(share());
+  // }
   // fetchStocks(){
   //   this.stocks$ = this.stockService.getStocks();
   // }

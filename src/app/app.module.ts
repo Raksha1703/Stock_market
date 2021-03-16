@@ -18,6 +18,7 @@ import { LoginComponent } from './user/login/login.component';
 import { RegisterComponent } from './user/register/register.component';
 import { UserStoreService } from './services/user-store.service';
 import { UserService } from './services/user.service';
+import { StockDetailComponent } from './stock/stock-detail/stock-detail.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -25,7 +26,8 @@ import { UserService } from './services/user.service';
     CreateStockComponent,
     StockListComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    StockDetailComponent
   ],
   imports: [
     BrowserModule,
