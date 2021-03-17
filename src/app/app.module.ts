@@ -19,6 +19,8 @@ import { RegisterComponent } from './user/register/register.component';
 import { UserStoreService } from './services/user-store.service';
 import { UserService } from './services/user.service';
 import { StockDetailComponent } from './stock/stock-detail/stock-detail.component';
+import { AuthGuard } from './guards/auth.guard';
+import { CreateStockDeactivateGuard } from './guards/create-stock-deactivate.guard';
 @NgModule({
   declarations: [
     AppComponent,
@@ -41,6 +43,8 @@ import { StockDetailComponent } from './stock/stock-detail/stock-detail.componen
     MessageService,
     UserStoreService,
     UserService,
+    AuthGuard,
+    CreateStockDeactivateGuard,
     AuthService,
     {
       provide: HTTP_INTERCEPTORS, 

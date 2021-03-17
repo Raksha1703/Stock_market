@@ -7,14 +7,18 @@ import { StockListComponent } from './stock/stock-list/stock-list.component';
 import { LoginComponent } from './user/login/login.component';
 import { RegisterComponent } from './user/register/register.component';
 import { StockDetailComponent } from './stock/stock-detail/stock-detail.component';
+import { AuthGuard } from './guards/auth.guard';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full'},
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'stocks/list', component: StockListComponent },
-  { path: 'stocks/create', component: CreateStockComponent },
-  { path: 'stock/:code', component: StockDetailComponent },
+  { path: 'stocks/list', component: StockListComponent,
+    canActivate: [AuthGuard]  },
+  { path: 'stocks/create', component: CreateStockComponent,
+    canActivate: [AuthGuard]  },
+  { path: 'stock/:code', component: StockDetailComponent,
+    canActivate: [AuthGuard]  },
   { path: '**', redirectTo: '/register'}
   ];
   
