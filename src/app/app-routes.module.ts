@@ -8,6 +8,8 @@ import { LoginComponent } from './user/login/login.component';
 import { RegisterComponent } from './user/register/register.component';
 import { StockDetailComponent } from './stock/stock-detail/stock-detail.component';
 import { AuthGuard } from './guards/auth.guard';
+import { CreateStockDeactivateGuard } from './guards/create-stock-deactivate.guard';
+import { StockLoadResolverService } from './resolver/stock-load-resolver.service';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full'},
@@ -16,9 +18,11 @@ const appRoutes: Routes = [
   { path: 'stocks/list', component: StockListComponent,
     canActivate: [AuthGuard]  },
   { path: 'stocks/create', component: CreateStockComponent,
-    canActivate: [AuthGuard]  },
+    canActivate: [AuthGuard],
+    canDeactivate: [CreateStockDeactivateGuard]  },
   { path: 'stock/:code', component: StockDetailComponent,
-    canActivate: [AuthGuard]  },
+    canActivate: [AuthGuard],
+    resolve: { stock: StockLoadResolverService }  },
   { path: '**', redirectTo: '/register'}
   ];
   

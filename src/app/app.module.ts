@@ -21,6 +21,7 @@ import { UserService } from './services/user.service';
 import { StockDetailComponent } from './stock/stock-detail/stock-detail.component';
 import { AuthGuard } from './guards/auth.guard';
 import { CreateStockDeactivateGuard } from './guards/create-stock-deactivate.guard';
+import { StockLoadResolverService } from './resolver/stock-load-resolver.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -44,6 +45,7 @@ import { CreateStockDeactivateGuard } from './guards/create-stock-deactivate.gua
     UserStoreService,
     UserService,
     AuthGuard,
+    StockLoadResolverService,
     CreateStockDeactivateGuard,
     AuthService,
     {
