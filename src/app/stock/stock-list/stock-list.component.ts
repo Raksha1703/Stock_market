@@ -5,7 +5,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { StockService } from 'src/app/services/stock.service';
 import { share } from 'rxjs/operators';
 import { UserStoreService } from 'src/app/services/user-store.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 
 
@@ -18,15 +18,28 @@ export class StockListComponent implements OnInit {
 
   public stocks$:Observable<Stock[]>;
   public searchString : '';
+  private page = 1;
   constructor(private stockService:StockService,
               private userStore:UserStoreService,
-              private route: ActivatedRoute) {  }
+              private route: ActivatedRoute,
+              private router:Router) {  }
 
   ngOnInit(){
     console.log('Page No. :', 
                 this.route.snapshot.queryParamMap.get('page'));
+    this.route.queryParams.subscribe((params) =>{
+    console.log('Page:', params.page);
+    });
     this.stocks$ = this.stockService.getStocks();
     //this.fetchStocks();
+  }
+
+  nextPage(){
+    this.router.navigate([],{
+      queryParams : {
+        page : ++this.page
+      }
+    })
   }
 
   // search() {
