@@ -1,6 +1,11 @@
-.links, .links a { 
-    padding: 10px;
+ .links a { 
+    padding: 14px 20px;
 }
 .links a.active { 
-    background-color: grey;
+    background-color: #3590f1;
+    
+}
+.__nav{
+    padding: 0px !important;
+    background-color: #007bff;
 }
