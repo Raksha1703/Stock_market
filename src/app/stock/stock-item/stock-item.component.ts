@@ -10,7 +10,7 @@ import { StockService } from 'src/app/services/stock.service';
 export class StockItemComponent implements OnInit {
 
   @Input() public stock:Stock;
-  //@Output() private toggleFavorite: EventEmitter<Stock>;
+  @Output() private toggleFavorite: EventEmitter<Stock>;
 
   constructor(private stockService : StockService) {  }
 

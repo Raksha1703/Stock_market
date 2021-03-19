@@ -2,12 +2,7 @@
     border: 1px solid black; padding: 10px;
     margin: 5px;
     }
-.stock-container {
-    border: 1px solid black;
-    border-radius: 5px;
-    display: inline-block;
-    padding: 10px;
-    }
+
 .stock-name .ng-valid, .stock-code .ng-valid, .stock-price .ng-valid {
     background-color: green; 
 }

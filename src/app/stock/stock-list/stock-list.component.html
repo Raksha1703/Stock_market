@@ -1,18 +1,14 @@
-<app-stock-item *ngFor="let stock of stocks$ | async" [stock]="stock">
-</app-stock-item>
-<div>
-  <button type="button" (click)="nextPage()">Next page</button> 
+<div class="container mt-5">
+  <div class="row row-cols-3 mt-5">
+    <app-stock-item class="col mt-4" *ngFor="let stock of stocks$ | async" [stock]="stock">
+    </app-stock-item>
+  </div>
+  <div class="row mt-5">
+    <div class="col-sm">
+      <button  class="btn btn-primary" type="button" (click)="nextPage()">Next page</button> 
+    </div>
+  </div>
 </div>
-<!-- <div class="offset-5 mt-3">
-  <div>
-    <input name="searchBox"
-    [(ngModel)]="searchString" placeholder="Search Here" (keyup)="search()">
-  </div>  
-  <h2>We have found {{(stocks$ | async)?.length}} Stocks!!</h2>
-</div> -->
-<!-- <div class="container">
-  <button type="button" (click)="fetchStocks()">ReFetch Stock</button>
-  <button type="button" (click)="makeFailingCall()">Make Failing Call</button>
-  <button type="button" (click)="setAuthToken()">Set Auth Token</button>
-  <button type="button" (click)="resetAuthToken()">Reset Auth Token</button>
-</div> -->
+
+
+

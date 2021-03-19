@@ -1,31 +1,22 @@
-<div class="container stock-container" routerLink="/stock/{{stock.code}}">
-  <div class="row name">
-    <div class="col-sm">
-      <h3>{{ stock.name + " (" + stock.code + ")" }}</h3>
-    </div>
-    <div class="row">
-      <div class="col-sm">{{stock.exchange}}</div>
-    </div>
-  </div>
-  <div class="row">
-    <div
-      class="price"
-      [class.positive]="stock.price > stock.previousPrice"
-      [class.negative]="stock.price <= stock.previousPrice"
-    >
-      $ {{ stock.price }}
-      
-    </div>
-    <div>
-        <button (click)="onToggleFavorite($event)" *ngIf="!stock.favorite">
-            Add to Favorite
-        </button>
-    </div>
-    <div>
-        <button (click)="onToggleFavorite($event)" *ngIf="stock.favorite">
-            Remove from Favorite
-        </button>
-    </div>
+
+<div class="card"  routerLink="/stock/{{stock.code}}">
+  <div class="card-body">
+    <h5 class="card-title">{{ stock.name + " (" + stock.code + ")" }}</h5>
+    <p class="card-text">{{stock.exchange}}</p>
+    <p
+    class="price"
+    [class.positive]="stock.price > stock.previousPrice"
+    [class.negative]="stock.price <= stock.previousPrice"
+  >
+    $ {{ stock.price }}
+    
+  </p>
+    <button class="btn btn-primary" (click)="onToggleFavorite($event)" *ngIf="!stock.favorite">
+      Add to Favorite
+  </button>
+  <button class="btn btn-danger" (click)="onToggleFavorite($event)" *ngIf="stock.favorite">
+    Remove from Favorite
+</button>
   </div>
 </div>
 
